@@ -33,7 +33,7 @@ jobs:
         ECR_REPOSITORY: ty-test-app
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
 # jobs:
 #   push_to_registry:
