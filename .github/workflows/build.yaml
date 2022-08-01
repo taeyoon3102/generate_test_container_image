@@ -13,28 +13,57 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-    
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-northeast-2
 
-    - name: Login to Amazon ECR
-      id: login-ecr
+    - name: Login to Amazon ECR Public
+      id: login-ecr-public
       uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registry-type: 'public'
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push docker image to Amazon ECR Public
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ty-test-app
+        REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        REGISTRY_ALIAS: pub-ty-test-app
+        REPOSITORY: pub-ty-test-app
+        IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
+## private ecr에 push
+# jobs:
+  
+#   build:
+    
+#     name: Build Image
+#     runs-on: ubuntu-latest
+   
+#     steps:
+#     - name: Check out code
+#       uses: actions/checkout@v2
+    
+#     - name: Configure AWS credentials
+#       uses: aws-actions/configure-aws-credentials@v1
+#       with:
+#         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         aws-region: ap-northeast-2
+
+#     - name: Login to Amazon ECR
+#       id: login-ecr
+#       uses: aws-actions/amazon-ecr-login@v1
+
+#     - name: Build, tag, and push image to Amazon ECR
+#       env:
+#         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#         ECR_REPOSITORY: ty-test-app
+#       run: |
+#         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+#         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+
+
+## github action packages 에 push
 # jobs:
 #   push_to_registry:
 #     name: Push Docker image to GitHub Packages
