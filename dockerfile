@@ -34,7 +34,7 @@ RUN apt install curl -y
 RUN apt install unzip -y
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 RUN unzip awscliv2.zip
-RUN sudo ./aws/install
+RUN ./aws/install
 
 ## redis 확인용
 RUN apt-get install redis-tools -y
