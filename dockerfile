@@ -25,14 +25,14 @@
 FROM ubuntu:18.04
 
 ## mysql 확인용
-RUN apt-get update && \ 
-apt-get upgrade && \
-apt-get install mysql-client -y
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install mysql-client -y
 
 ## 혹시 모를 aws 명령어 확인용
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-unzip awscliv2.zip && \
-sudo ./aws/install
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN sudo ./aws/install
 
 ## redis 확인용
 RUN apt-get install redis-tools -y
