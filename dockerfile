@@ -38,7 +38,8 @@ sudo ./aws/install
 RUN apt-get install redis-tools
 
 
-## 가상 머신에 오픈할 포트
+## 가상 머신에 오픈할 포트 
 EXPOSE 3000
 
+#
 
