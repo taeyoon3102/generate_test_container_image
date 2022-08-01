@@ -27,7 +27,7 @@ FROM ubuntu:18.04
 ## mysql 확인용
 RUN apt-get update && \ 
 apt-get upgrade && \
-apt-get install mysql-client
+apt-get install mysql-client -y
 
 ## 혹시 모를 aws 명령어 확인용
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
@@ -35,7 +35,7 @@ unzip awscliv2.zip && \
 sudo ./aws/install
 
 ## redis 확인용
-RUN apt-get install redis-tools
+RUN apt-get install redis-tools -y
 
 
 ## 가상 머신에 오픈할 포트 
