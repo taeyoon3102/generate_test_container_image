@@ -25,8 +25,8 @@
 FROM ubuntu:18.04
 
 ## mysql 확인용
-RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get install mysql-client -y
 
 ## 혹시 모를 aws 명령어 확인용
